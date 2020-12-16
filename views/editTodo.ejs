@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>
+        <%= locals.title%>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <header id="header">
+        <h1>TODO APP</h1>
+    </header>
+    <div class="row">
+        <nav class="col-sm">
+
+        </nav>
+        <main class="col-sm" id="main">
+            <!-- Update todo task start-->
+            <form action="/update-todo/?id=<%= updateTodo._id %>" method="POST" id="addTask">
+                <hr>
+                <div>
+                    <label>Description</label><br>
+                    <input type="text" name="Description" placeholder="Add a description"
+                        value="<%=updateTodo.Description%>" required />
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm">
+                        <label>Category</label><br>
+                        <select id="category" name="Category" required>
+                            <!-- Looping over select option values to show selected drop down by fetching its data -->
+                            <%
+                            var options = [ "Choose a category", "Personal", "Work", "School", "Cleaning", "Other" ];
+                            for ( var i = 0; i < options.length; i++ )
+                            {
+                                var selected = ( updateTodo.Category == options[i] ) ? "selected" : "";
+                                %><option value="<%=options[ i ] %>" <%=selected %>><%=options[i] %></option><%
+                            }
+                            %>
+                        </select>
+                    </div>
+                    <div class="col-sm">
+                        <label>Due Date</label>
+                        <input type="date" name="Due_Date" value="<%= updateTodo.Due_Date %>" required>
+                    </div>
+                </div>
+                <hr>
+                <div id="action">
+                    <button type="submit" id="create">update Task</button>
+                </div>
+            </form>
+            <!-- Update todo task end-->
+        </main>
+        <aside class="col-sm">
+
+        </aside>
+    </div>
+    <script type="text/javascript" src="/js/home.js"></script>
+</body>
+
+</html>
